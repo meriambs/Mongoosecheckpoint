@@ -1,21 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const { findAuth} = require('../Controllers/auth');
+const { sayauth, createAuth } = require('../Controllers/auth');
+const auth = require ('../middleware/auth');
+// const { body, validationResult } = require('express-validator');
 
-/* GET users listing. */
-// router.post('/', createUser);
 
-/* GET users listing. */
- router.get('/', findAuth);
-// router.get('/:id', findUsers);
-
-// // // update 
-// router.put('/name/:name',findandUpdate);
-// router.put('/:id',updateUser);
-
-// // //delete
-// router.delete('/multi',findandRemove);
-//  router.delete('/:id',deleteUser);
-// // // chain Search query:
-// router.post('/querychain',findQuery);
+/* GET home page. */
+router.get('/',auth,sayauth);
+//post 
+router.post(
+  '/',createAuth
+);
 module.exports = router;

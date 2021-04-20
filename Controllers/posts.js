@@ -1,4 +1,4 @@
-const Person = require('../Models/Person');
+
 
 //GET :  RETURN ALL USERS :
 const findPost= async(req, res)=>{

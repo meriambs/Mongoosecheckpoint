@@ -1,21 +1,25 @@
 var express = require('express');
 var router = express.Router();
-const { findUsers, createUser} = require('../Controllers/users');
+const auth = require('../middleware/auth')
+const { createUser,findUsers} = require('../Controllers/users');
+// ...rest of the initial code omitted for simplicity.
+
+//ramasser les fichiers 
 
 /* GET users listing. */
-router.post('/', createUser);
-
-/* GET users listing. */
- router.get('/', findUsers);
+  router.get('/', auth,findUsers);
 // router.get('/:id', findUsers);
+// router.post('/photo',auth,multipartMiddleware,uploadPhoto);
+/* POST users listing. */
 
-// // // update 
-// router.put('/name/:name',findandUpdate);
-// router.put('/:id',updateUser);
+router.post('/',createUser );
 
-// // //delete
-// router.delete('/multi',findandRemove);
+// // update 
+
+// router.put('/:id',findandUpdate);
+
+// //delete
+
 //  router.delete('/:id',deleteUser);
-// // // chain Search query:
-// router.post('/querychain',findQuery);
+
 module.exports = router;
