@@ -1,8 +1,20 @@
-var express = require('express');
-var router = express.Router();
-const { sayHello } = require('../Controllers/entry');
+// var express = require('express');
+// var router = express.Router();
+// const { findUsers, createUser,findandUpdate,deleteUser} = require('../Controllers/users');
 
-/* GET home page. */
-router.get('/',sayHello);
+// /* GET users listing. */
+// router.post('/', createUser);
 
-module.exports = router;
+// /* GET users listing. */
+//  router.get('/', findUsers);
+// // router.get('/:id', findUsers);
+
+// // // update 
+
+// router.put('/:id',findandUpdate);
+
+// // //delete
+
+//  router.delete('/:id',deleteUser);
+
+// module.exports = router;

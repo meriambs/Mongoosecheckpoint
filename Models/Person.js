@@ -1,14 +1,35 @@
 
 // ****-Create a person having this prototype:-****
+let mongoose = require("mongoose");
 
+//Create a person having this prototype:
+let peapleSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email:{
+    type:String,
+    required:true
+  },
+  avatar:{
+    type:String,
 
-const mongoose = require("mongoose");
-let peopleSchema = new mongoose.Schema({
-    name:{type:String,
-      require:true},
-     date: { type: Date, default: Date.now() }
-    
-})
-const Person = mongoose.model("Person", peopleSchema);
+    required:true, 
+  },
+  phonenumber:Number,
+  age: Number,
+  password:{
+    type:String,
+    required:true
+  },
+  photo:{
+    type:String,
+  }
+});
 
-module.exports = Person;
+module.exports = Person = mongoose.model("Person", peapleSchema);
