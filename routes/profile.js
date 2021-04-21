@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const { findProfil} = require('../Controllers/profile');
-
+const auth = require('../middleware/auth');
 /* GET users listing. */
 // router.post('/', createProfile);
 
 /* GET users listing. */
-  router.get('/', findProfil);
+  router.get('/me',auth, findProfil);
   // router.get('/:id', findProfil);
 
 // // // update 

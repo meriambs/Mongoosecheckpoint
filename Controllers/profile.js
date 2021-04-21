@@ -1,10 +1,20 @@
-
-
+const Profil = require('../Models/Profile');
+const User = require('../Models/User');
 //GET :  RETURN ALL USERS :
 
 const findProfil= async(req, res)=>{
-    // const returnUser = await Person.find({name:req.parms.name});
-    return res.send("returnUser")
+  try{
+    const returnUser = await Profil.findOne({user:req.user.id}).populate('user',['name','avatar']);
+ 
+ if(!returnUser){
+   return res.status(400).json({msg:'there is no profile for this user'})
+ }
+ res.json(returnUser);
+  }catch(error){
+     console.error(error.message)
+    res.status(500).send('server error'); 
+  
+  }
 }
 
 

@@ -22,7 +22,9 @@ let profilSchema = new mongoose.Schema({
  },
  LastDeploma:{
    type:String,
- }
+ },
+
+
 });
 
-module.exports = Profil = mongoose.model("profil", profilSchema);
+module.exports = Profil = mongoose.model("profile", profilSchema);
