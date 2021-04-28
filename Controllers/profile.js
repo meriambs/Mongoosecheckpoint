@@ -49,9 +49,9 @@ const findProfil= async(req, res)=>{
 //  const persons = new User(req.body);
 //  const t = await persons.save()
 try{
-let profile = await  Profile.findOne ({user:req.user.id})
+let profile = await  Profile.findOne({user:req.user.id})
 if(profile){
-profile = await Profile.findByIdAndUpdate({user :req.user.id},{$set:profilefiled},{new:true})
+profile = await Profile.findOneAndUpdate ({user :req.user.id},{$set:profilefiled},{new:true})
 
 return res.json(profile)
 }
