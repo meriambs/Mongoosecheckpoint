@@ -1,3 +1,4 @@
+const Profile = require('../Models/Profile');
 const Profil = require('../Models/Profile');
 const User = require('../Models/User');
 //GET :  RETURN ALL USERS :
@@ -20,13 +21,50 @@ const findProfil= async(req, res)=>{
 
 // POST :  ADD A NEW USER TO THE DATABASE :
 
-// const createUser = async (req, res) => {
-//     console.log('req.body',req.body)
-// const persons = new Person(req.body);
-// const t = await persons.save()
+ const createProfile = async (req, res) => {
+   const {
+     company,
+     webSite,
+     location,
+     githubUser,
+     twitter,
+     LinkedIn,
+     LastDeploma,
+     status
+   }=req.body;
 
-// return res.send(t)
-// }
+   //build profile object:
+   const profilefiled={};
+   profilefiled.user= req.user.id;
+   if(company)profilefiled.company=company;
+   if(webSite)profilefiled.webSite=webSite;
+   if(location)profilefiled.location=location;
+   if(githubUser)profilefiled.githubUser=githubUser;
+   if(twitter)profilefiled.twitter=twitter;
+   if(LinkedIn)profilefiled.LinkedIn=LinkedIn;
+   if(LastDeploma)profilefiled.LastDeploma=LastDeploma;
+   if(status)profilefiled.status=status;
+   //ici les parties 
+//      console.log('req.body',req.body)
+//  const persons = new User(req.body);
+//  const t = await persons.save()
+try{
+let profile = await  Profile.findOne ({user:req.user.id})
+if(profile){
+profile = await Profile.findByIdAndUpdate({user :req.user.id},{$set:profilefiled},{new:true})
+
+return res.json(profile)
+}
+//naw we create things 
+profile = new Profile(profilefiled);
+await profile.save();
+return res.json(profile);
+
+}catch(error){
+  console.error(error.message);
+  res.status(500).send('server error')
+}
+ }
 
 
    //PUT : EDIT A USER BY ID 
@@ -43,5 +81,5 @@ const findProfil= async(req, res)=>{
 // }
 module.exports = {
     findProfil,
-  
+    createProfile
 }

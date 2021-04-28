@@ -23,8 +23,16 @@ let profilSchema = new mongoose.Schema({
  LastDeploma:{
    type:String,
  },
-
+ LinkedIn:{
+  type:String,
+},
+status:{
+  type:String,
+},
+twitter:{
+  type:String,
+},
 
 });
 
-module.exports = Profil = mongoose.model("profile", profilSchema);
+module.exports = Profil = mongoose.model("Profile", profilSchema);

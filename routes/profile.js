@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const { findProfil} = require('../Controllers/profile');
+const { findProfil,createProfile} = require('../Controllers/profile');
 const auth = require('../middleware/auth');
 /* GET users listing. */
-// router.post('/', createProfile);
+ router.post('/',auth, createProfile);
 
 /* GET users listing. */
   router.get('/me',auth, findProfil);
