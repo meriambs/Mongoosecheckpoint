@@ -65,7 +65,36 @@ return res.json(profile);
   res.status(500).send('server error')
 }
  }
+// get all profiles 
+const getProfile = async(req, res)=>{
+try{
+const profiles = await Profile.find().populate('user',['name','avatar']);
+res.json(profiles);
+}catch(error){
+  console.error(error.message);
+  res.status(500).send('server error')
+}
+}
+//get profile by id user:
+const getProfilebyId =async(req,res)=>{
+  try{
+    const profil = await Profile.findOne(
+      {user:req.params.user_id
+      }).populate('user',['name','avatar']);
+    
+   if(!profil)
+    return res.status(400).json({msg:'there is no profile for this user'});
+    
+    res.json(profil);
 
+    }catch(error){
+      console.error(error.message);
+      if(error.kind == 'ObjectId'){
+        return res.status(400).json({msg:'profile not foiunbd'});
+      }
+      res.status(500).send('server error')
+    }
+}
 
    //PUT : EDIT A USER BY ID 
 // const findandUpdate = async ( req , res)=>{
@@ -81,5 +110,7 @@ return res.json(profile);
 // }
 module.exports = {
     findProfil,
-    createProfile
+    createProfile,
+    getProfile,
+    getProfilebyId
 }
