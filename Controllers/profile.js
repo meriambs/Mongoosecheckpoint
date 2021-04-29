@@ -1,3 +1,4 @@
+const { request } = require('express');
 const Profile = require('../Models/Profile');
 const Profil = require('../Models/Profile');
 const User = require('../Models/User');
@@ -104,13 +105,49 @@ const getProfilebyId =async(req,res)=>{
 
 
   //   DELETE : REMOVE A USER BY ID 
-//   const deleteUser = async (req,res)=>{
-//     const deltedPerson = await Person.findByIdAndRemove({_id:req.params.id});
-//     return res.send(deltedPerson)
-// }
+   const deleteProfile = async (req,res)=>{
+// if we wanna deleat the user 
+     try{
+
+      // if you want dealt profile 
+      await Profile.findOneAndRemove({user :req.user.id});
+      await User.findOneAndRemove  ({_id:req.user.id});
+      
+  res.json({msg:'use delete'})
+     }
+     catch(error){
+      console.error(error.message);
+      res.status(500).send('server error')
+     }
+ 
+ }
+
+ const giuserName = async(req, res)=>{
+   try{
+  const option = {
+uri:`https://api.github.com/users/${req.params.username}/repos?per_page=5&sprt=created:asc&client_id=${config.get('githubClientId')}$client_secret=${config.get('githubSecret')}`,
+method: 'GET',
+headers:{'user-agent':'node.js'}
+  }
+  request(option,(error, response, body)=>{
+    if(error)console.error(error.message);
+    if (response.statusCode !== 200){
+      res.status(404).json({msg:'nbo github'})
+    }
+    res.json(JSON.parse(body))
+  })
+  res.json(option); 
+
+   }catch(error){
+     console.error(error.message);
+     res.status(500).send('server error')
+   }
+ }
 module.exports = {
     findProfil,
     createProfile,
     getProfile,
-    getProfilebyId
+    getProfilebyId,
+    deleteProfile,
+    giuserName
 }

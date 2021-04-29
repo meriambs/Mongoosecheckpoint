@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const { findProfil,createProfile,getProfile,getProfilebyId} = require('../Controllers/profile');
+const { findProfil,createProfile,getProfile,getProfilebyId,deleteProfile,giuserName} = require('../Controllers/profile');
 const auth = require('../middleware/auth');
+const request = require('request');
+const config = require('config');
 /* GET users listing. */
  router.post('/',auth, createProfile);
 
@@ -19,7 +21,11 @@ router.get('/user/:user_id',getProfilebyId)
 
 // // //delete
 // router.delete('/multi',findandRemove);
-//  router.delete('/:id',deleteUser);
+  router.delete('/',auth,deleteProfile);
 // // // chain Search query:
 // router.post('/querychain',findQuery);
+
+// get user github name 
+
+router.get('/github/:username',auth,giuserName)
 module.exports = router;
