@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../middleware/auth');
 const {findPost } = require('../Controllers/posts');
-
+const Post = require('../Models/Post');
+const User = require('../Models/User');
+const Profile = require('../Models/Profile');
 /* GET users listing. */
 // router.post('/', createUser);
 
 /* GET users listing. */
- router.get('/', findPost);
+ router.get('/', auth,findPost);
 // router.get('/:id', findUsers);
 
 // // // update 
