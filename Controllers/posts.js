@@ -99,6 +99,7 @@ const likePost = async(req, res)=>{
     try{
         
         const post = await Post.findById(req.params.id);
+        
         console.log(post)
         //check if th epost is liked alredy :
         if(post.likes.filter(like=>like.user.toString() === req.user.id).length()>0){
@@ -122,3 +123,9 @@ module.exports={
     deletePost,
     likePost
     }
+
+    /// le token 
+   // x-auth-token 
+    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA4YjUyNDViZDI0MWQxMWU3NGQ3MGNmIn0sImlhdCI6MTYxOTc0MzMwMX0.0mRMrfSYe5xKBApmKAOi0DSKqVJbuPvKk6ZhaqiNj-I
+    //url 
+    //http://localhost:4150/Post/like/608b60c758c04f1795babb6f
