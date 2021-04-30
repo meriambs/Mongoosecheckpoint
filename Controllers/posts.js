@@ -93,9 +93,32 @@ res.json({msg:'post removed'});
         res.status(500).json('error servor')
     }
 }
+//like comment 
+const likePost = async(req, res)=>{
+
+    try{
+        
+        const post = await Post.findById(req.params.id);
+        console.log(post)
+        //check if th epost is liked alredy :
+        if(post.likes.filter(like=>like.user.toString() === req.user.id).length()>0){
+            return res.status(400).json({msg:'alredy liked'})
+        }
+        post.likes.unshift({user: req.user.id});
+
+       await post.save()
+       res.json(post.likes)
+
+    }catch(error){
+        console.error(error.message);
+        
+        res.status(500).json('error servor')
+    }
+}
 module.exports={
     findPost,
     getPosts,
     getPostsidii,
-    deletePost
+    deletePost,
+    likePost
     }
