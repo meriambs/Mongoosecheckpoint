@@ -1,12 +1,13 @@
 
 // ****-Create a person having this prototype:-****
 let mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 //Create a person having this prototype:
 let postSchema = new mongoose.Schema({
   user:{
     type:Schema.Types.ObjectId,
-    ref:'users'
+    ref:'user'
   },
   text:{
     type:String,
@@ -20,7 +21,7 @@ let postSchema = new mongoose.Schema({
   },
   likes:[{
     user:{
-      type:mongoose.Schema.Types.ObjectId,
+      type:Schema.Types.ObjectId,
       ref:'users'
     },
     
@@ -29,7 +30,7 @@ let postSchema = new mongoose.Schema({
 ],
 comments:[{
   user:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:Schema.Types.ObjectId,
     ref:'users'
   },
   text:{

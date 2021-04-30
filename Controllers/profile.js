@@ -6,7 +6,7 @@ const User = require('../Models/User');
 
 const findProfil= async(req, res)=>{
   try{
-    const returnUser = await Profil.findOne({user:req.user.id}).populate('user',['name','avatar']);
+    const returnUser = await Profile.findOne({user:req.user.id}).populate('user',['name','avatar']);
  
  if(!returnUser){
    return res.status(400).json({msg:'there is no profile for this user'})

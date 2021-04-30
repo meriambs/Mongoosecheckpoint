@@ -35,4 +35,4 @@ twitter:{
 
 });
 
-module.exports = Profil = mongoose.model("Profile", profilSchema);
+module.exports = Profile = mongoose.model("profile", profilSchema);
