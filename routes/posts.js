@@ -25,6 +25,6 @@ router.get('/:id',auth,getPostsidii)
   router.delete('/:id',auth,deletePost);
 // // // chain Search query:
 //like comment 
-router.put('/like/:id',auth,likePost);
+router.post('/like/:id',auth,likePost);
 // router.post('/querychain',findQuery);
 module.exports = router;

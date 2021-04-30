@@ -102,11 +102,14 @@ const likePost = async(req, res)=>{
         
         console.log(post)
         //check if th epost is liked alredy :
-        if(post.likes.filter(like=>like.user.toString() === req.user.id).length()>0){
-            return res.status(400).json({msg:'alredy liked'})
+        if( post.likes.filter(like => like.user.toString() === req.user.user.id)
+        .length > 0){
+            return res
+              .status(400)
+              .json({ alreadyliked: 'User already liked this post' });
+          
         }
-        post.likes.unshift({user: req.user.id});
-
+        post.likes.unshift({ user: req.user.id });
        await post.save()
        res.json(post.likes)
 
