@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../middleware/auth');
-const {findPost ,getPosts} = require('../Controllers/posts');
+const {findPost ,getPosts,getPostsidii,    deletePost
+} = require('../Controllers/posts');
 const Post = require('../Models/Post');
 const User = require('../Models/User');
 const Profile = require('../Models/Profile'); 
@@ -13,13 +14,15 @@ const Profile = require('../Models/Profile');
 // router.get('/:id', findUsers);
 /*get posts */
 router.get('/',auth,getPosts)
-// // // update 
+// // // get post selon el id 
+router.get('/:id',auth,getPostsidii)
+
 // router.put('/name/:name',findandUpdate);
 // router.put('/:id',updateUser);
 
 // // //delete
 // router.delete('/multi',findandRemove);
-//  router.delete('/:id',deleteUser);
+  router.delete('/:id',auth,deletePost);
 // // // chain Search query:
 // router.post('/querychain',findQuery);
 module.exports = router;
