@@ -4,7 +4,8 @@
 const findPost= async(req, res)=>{
     // const returnUser = await Person.find({name:req.parms.name});
     try{
-const user = await User.findById(req.user.id).select('-password');
+        //ici on a ajout de la partie user user pour pouvoir envoyer le post 
+const user = await User.findById(req.user.user.id).select('-password');
 
 const newPost = new Post({
     text: req.body.text,
