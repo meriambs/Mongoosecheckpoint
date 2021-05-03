@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../middleware/auth');
-const {findPost ,getPosts,getPostsidii,  likePost,  deletePost
-} = require('../Controllers/posts');
+const {findPost ,getPosts,getPostsidii,  likePost,  deletePost, commentPost} = require('../Controllers/posts');
 const Post = require('../Models/Post');
 const User = require('../Models/User');
 const Profile = require('../Models/Profile'); 
@@ -26,5 +25,7 @@ router.get('/:id',auth,getPostsidii)
 // // // chain Search query:
 //like comment 
 router.post('/like/:id',auth,likePost);
+//commentaire :
+// // router.post('/comment/:id',auth,commentPost);
 // router.post('/querychain',findQuery);
 module.exports = router;

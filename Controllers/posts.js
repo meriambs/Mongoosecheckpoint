@@ -100,10 +100,11 @@ const likePost = async(req, res)=>{
         
         const post = await Post.findById(req.params.id);
         
-        console.log(post)
+        console.log(post);
         //check if th epost is liked alredy :
-        if( post.likes.filter(like => like.user.toString() === req.user.user.id)
-        .length > 0){
+        console.log('ici',post.likes);
+        console.log('scd text',req.user.user.id)
+        if( post.likes.length > 0 && post.likes.filter(like => like.user  === req.user.user.id).length > 0){
             return res
               .status(400)
               .json({ alreadyliked: 'User already liked this post' });
@@ -119,12 +120,36 @@ const likePost = async(req, res)=>{
         res.status(500).json('error servor')
     }
 }
+//partie commentaire :
+const commentPost = async(req, res)=>{
+    try{
+        //ici on a ajout de la partie user user pour pouvoir envoyer le post 
+const user = await User.findById(req.user.user.id).select('-password');
+const post = await Post.findById(req.params.id);
+const newComment = {
+    text: req.body.text,
+     name: user.name, 
+     avatar: user.avatar,
+    user: req.user.id
+};
+post.comments.unshift(newComment);
+ await post.save();
+
+res.json(post.comments )
+
+    }
+    catch(error){
+        console.error(error.message);
+        res.status(500).json('server eroor')
+    }
+}
 module.exports={
     findPost,
     getPosts,
     getPostsidii,
     deletePost,
-    likePost
+    likePost,
+    commentPost
     }
 
     /// le token 
