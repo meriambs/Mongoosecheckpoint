@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../middleware/auth');
-const {findPost ,getPosts,getPostsidii,  likePost,  deletePost, commentPost} = require('../Controllers/posts');
+const {findPost ,getPosts,getPostsidii,  likePost,  deletePost, commentPost ,deleteComment} = require('../Controllers/posts');
 const Post = require('../Models/Post');
 const User = require('../Models/User');
 const Profile = require('../Models/Profile'); 
@@ -26,6 +26,8 @@ router.get('/:id',auth,getPostsidii)
 //like comment 
 router.post('/like/:id',auth,likePost);
 //commentaire :
-// // router.post('/comment/:id',auth,commentPost);
+ router.post('/comment/:id',auth,commentPost);
+ //thi s one is to deletre the comment part :
+ router.delete('/comment/:id/:comment_id',auth,deleteComment)
 // router.post('/querychain',findQuery);
 module.exports = router;

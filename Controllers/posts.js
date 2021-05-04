@@ -143,17 +143,50 @@ res.json(post.comments )
         res.status(500).json('server eroor')
     }
 }
+
+//delete comment part :
+const deleteComment  = async(req, res)=>{
+
+    try{
+        const post = await Post.findById(req.params.id);
+        // 
+        const comment =  post.comments.find(comment => comment.id === req.params.comment_id);
+        //handel if the post doenst exist 
+        if(!comment){
+            return res.status(404).json({msg:'comment  not found'});
+        }
+        //delete by only the owner of the post 
+        //check on the user to delete 
+         
+        if(comment.user !== req.user.id){
+            return res.status(401).json({msg:'user  not auth'});
+
+        }
+        //get remove comment : 
+        const removeIndexComment = post.comments.map(comment=>comment.user).indexOf(req.user.id);
+        post.comments.slice(removeIndexComment,1);
+    
+
+        await post.save();
+
+res.json(post.comments);
+
+    }catch(error){
+        console.error(error.message);
+        if(error.kind === 'ObjectId'){
+            return res.status(404).json({msg:'post not find'});
+        }
+        res.status(500).json('error servor');
+    }
+}
 module.exports={
     findPost,
     getPosts,
     getPostsidii,
     deletePost,
     likePost,
-    commentPost
+    commentPost,
+    deleteComment
     }
 
-    /// le token 
-   // x-auth-token 
-    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjA4YjUyNDViZDI0MWQxMWU3NGQ3MGNmIn0sImlhdCI6MTYxOTc0MzMwMX0.0mRMrfSYe5xKBApmKAOi0DSKqVJbuPvKk6ZhaqiNj-I
-    //url 
-    //http://localhost:4150/Post/like/608b60c758c04f1795babb6f
+     
