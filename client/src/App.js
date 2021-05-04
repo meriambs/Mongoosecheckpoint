@@ -1,22 +1,30 @@
-
-// import './App.css';
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBBar from './component/NavBBar';
-// import  ShoppingList  from "./component/ShoppingList";
-import TodoInput from './component/TodoInput';
-import TodoList from './component/TodoList'
+import './index.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Navigation from './Compoment/Navigation';
+import Landing from './Landing';
+import Register from "./Compoment/Authentification/Register";
+import Login from './Compoment/Authentification/Login';
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-       <NavBBar/>
-       {/* <ShoppingList/> */}
-        <TodoInput style={{ marginBottom:"20px"}}/>
-        <TodoList/>
-      </header>
+     <Navigation/>
+     <Route exact path="/" component={Landing}/>
+   <section className="container">
+   <Switch>
+   <Route exact path="/register" component={Register}/>
+   <Route path="/login" component={Login}/>
+   </Switch>
+   </section>
+  
     </div>
+    </Router>
   );
 }
 
