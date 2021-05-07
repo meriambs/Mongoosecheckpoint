@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+     "start": "nodemon app.js"
+     
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -24,6 +25,8 @@
     "mv": "^2.1.1",
     "nodemon": "^2.0.7",
     "prop-types": "^15.7.2",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^5.2.0",
     "request": "^2.88.2",
     "uuid": "^8.3.2"
   }

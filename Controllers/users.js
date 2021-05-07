@@ -34,7 +34,7 @@ const createUser = async  (req, res) => {
    
 
 
- const {name ,lastName, email , password,isRecruiter} = req.body 
+ const {name ,lastName, email , password} = req.body 
  try{
 //   //see i fuser exists:
    let user = await User.findOne({email});
